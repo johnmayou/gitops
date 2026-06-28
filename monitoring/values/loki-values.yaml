@@ -1,0 +1,11 @@
+loki:
+  enabled: true
+  persistence:
+    enabled: true
+    storageClassName: local-path
+    size: 10Gi
+
+promtail:
+  enabled: true
+  # Promtail auto-discovers all pods via node log scraping
+  # No config changes needed for basic log collection
