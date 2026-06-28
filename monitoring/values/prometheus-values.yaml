@@ -32,6 +32,17 @@ prometheus:
               storage: 20Gi
 
 alertmanager:
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    hosts:
+      - alertmanager.johnmayou.com
+    tls:
+      - secretName: alertmanager-tls
+        hosts:
+          - alertmanager.johnmayou.com
   alertmanagerSpec:
     storage:
       volumeClaimTemplate:
