@@ -11,6 +11,8 @@ spec:
     repoURL: https://github.com/johnmayou/uber
     targetRevision: main
     path: deploy/manifests
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: uber
