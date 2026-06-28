@@ -9,3 +9,8 @@ promtail:
   enabled: true
   # Promtail auto-discovers all pods via node log scraping
   # No config changes needed for basic log collection
+
+grafana:
+  sidecar:
+    datasources:
+      enabled: false
