@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: loki
+  name: promtail
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
   sources:
     - repoURL: https://grafana.github.io/helm-charts
-      chart: loki
-      targetRevision: "7.0.0" # https://github.com/grafana/helm-charts/releases
+      chart: promtail
+      targetRevision: "6.17.1" # https://github.com/grafana/helm-charts/releases
       helm:
         valueFiles:
-          - $values/monitoring/values/loki-values.yaml
+          - $values/monitoring/values/promtail-values.yaml
     - repoURL: https://github.com/johnmayou/gitops
       targetRevision: main
       ref: values
