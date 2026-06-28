@@ -4,7 +4,9 @@ lint:
 		-schema-location default \
 		-schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json' \
 		-ignore-filename-pattern '.*/values/.*' \
+		-ignore-filename-pattern '(.*/)?\..+' \
 		.
+	@yamllint .
 
 .PHONY: argo-password
 argo-password:
