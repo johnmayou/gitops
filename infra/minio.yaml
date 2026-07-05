@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://charts.min.io/
+    chart: minio
+    targetRevision: 7.1.1
+    helm:
+      values: |
+        mode: standalone
+        replicas: 1
+        persistence:
+          enabled: true
+          size: 50Gi
+          storageClass: local-path
+        resources:
+          requests:
+            memory: 512Mi
+            cpu: 250m
+          limits:
+            memory: 1Gi
+            cpu: "1"
+        existingSecret: minio-admin-secret
+        buckets:
+          - name: uber
+            policy: none
+            purge: false
+        ingress:
+          enabled: false
+        consoleIngress:
+          enabled: true
+          ingressClassName: traefik
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-prod
+          hosts:
+            - minio.johnmayou.com
+          tls:
+            - secretName: minio-console-tls
+              hosts:
+                - minio.johnmayou.com
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: minio
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
