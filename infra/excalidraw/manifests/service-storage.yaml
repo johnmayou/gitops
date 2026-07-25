@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: excalidraw-storage
+  namespace: excalidraw
+spec:
+  selector:
+    app: excalidraw-storage
+  ports:
+    - port: 8081
+      targetPort: 8081

@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: excalidraw
+  namespace: excalidraw
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - excalidraw.johnmayou.com
+        - excalidraw-storage.johnmayou.com
+      secretName: excalidraw-tls
+  rules:
+    - host: excalidraw.johnmayou.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: excalidraw-client
+                port:
+                  number: 80
+    - host: excalidraw-storage.johnmayou.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: excalidraw-storage
+                port:
+                  number: 8081
