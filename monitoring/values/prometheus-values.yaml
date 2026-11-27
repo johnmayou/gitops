@@ -1,20 +1,5 @@
 grafana:
   enabled: true
-  admin:
-    existingSecret: grafana-admin-secret
-    userKey: admin-user
-    passwordKey: admin-password
-  ingress:
-    enabled: true
-    ingressClassName: traefik
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-prod
-    hosts:
-      - grafana.johnmayou.com
-    tls:
-      - secretName: grafana-tls
-        hosts:
-          - grafana.johnmayou.com
 
 prometheus:
   prometheusSpec:
@@ -32,17 +17,6 @@ prometheus:
               storage: 20Gi
 
 alertmanager:
-  ingress:
-    enabled: true
-    ingressClassName: traefik
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-prod
-    hosts:
-      - alertmanager.johnmayou.com
-    tls:
-      - secretName: alertmanager-tls
-        hosts:
-          - alertmanager.johnmayou.com
   alertmanagerSpec:
     storage:
       volumeClaimTemplate:
