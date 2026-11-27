@@ -1,0 +1,13 @@
+configs:
+  params:
+    server.insecure: true
+  secret:
+    # bcrypt of "admin". Local-only cluster, so a known login beats a lookup step.
+    argocdServerAdminPassword: "$2a$10$lIodg6iCghhCx1zXFponVOw7BhVYZNirLHwL21mtoAkCm9BVWtpY."
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    hostname: argocd.localhost
+    path: /
