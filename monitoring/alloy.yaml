@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: promtail
+  name: alloy
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "2"
@@ -9,11 +9,11 @@ spec:
   project: default
   sources:
     - repoURL: https://grafana.github.io/helm-charts
-      chart: promtail
-      targetRevision: "6.17.1" # https://github.com/grafana/helm-charts/releases
+      chart: alloy
+      targetRevision: "1.16.0" # https://github.com/grafana/alloy/releases
       helm:
         valueFiles:
-          - $values/monitoring/values/promtail-values.yaml
+          - $values/monitoring/values/alloy-values.yaml
     - repoURL: https://github.com/johnmayou/gitops
       targetRevision: main
       ref: values

@@ -1,5 +1,16 @@
 grafana:
   enabled: true
+  adminPassword: admin
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    hosts:
+      - grafana.localhost
+    path: /
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      url: http://loki.monitoring.svc:3100
 
 prometheus:
   prometheusSpec:

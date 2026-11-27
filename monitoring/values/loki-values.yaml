@@ -35,3 +35,12 @@ monitoring:
     enabled: false
     grafanaAgent:
       installOperator: false
+
+chunksCache:
+  enabled: false
+resultsCache:
+  enabled: false
+lokiCanary:
+  enabled: false
+test:
+  enabled: false

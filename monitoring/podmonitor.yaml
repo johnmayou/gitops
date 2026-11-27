@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: platform-metrics
+  namespace: monitoring
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  namespaceSelector:
+    any: true
+  selector:
+    matchLabels:
+      platform.metrics: "true"
+  podMetricsEndpoints:
+    - port: http
+      path: /metrics
